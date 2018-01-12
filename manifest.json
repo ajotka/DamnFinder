@@ -1,0 +1,15 @@
+{
+  "name": "DamnFinder",
+  "description": "JavaScript little code, which can search in Facebook rude words and highlight them. It can be a convenience for any social manager.",
+  "version": "1.0",
+  "author": "AJOTKA",
+  "permissions": [
+    "tabs", "http://*/*", "https://*/*"
+  ],
+  "browser_action": {
+      "default_title": "DamnFinder - Settings",
+      "default_icon": "icon.png",
+      "default_popup": "index.html"
+  },
+  "manifest_version": 2
+}
