@@ -1,17 +1,34 @@
 // Copyright (c) 2018 AJOTKA. All rights reserved.
 
-function click(e) {
-  /* TODO: execute damnfinder.js wit dynamic vars */
+
+function damnFind(highlight, textColor, words, myClass) {
+
+  var stringWords = '';
+  for (var i=0; i < words.length; i++) {
+    if( i != words.length - 1)
+      stringWords = stringWords + "'" + words[i] + "',";
+    else
+      stringWords = stringWords + "'" + words[i] + "'";
+  }
+
+  var stringCode = 'var tables = document.getElementsByClassName("'+myClass+'");var words=['+stringWords+'];for(var i = 0; i < tables.length; i++) {var s = tables[i].innerHTML;for (var j = 0; j < words.length; j++) { s = s.replace(words[j], \'<span style="background-color:'+ highlight +';color:'+ textColor +';">\'+words[j]+\'</span>\'); } tables[i].innerHTML = s;}';
+
   chrome.tabs.executeScript(null,
-      {code:
-      	"document.body.style.backgroundColor='" + highlight + "'"
-      });
+    {code:
+        stringCode
+    });
+
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-	/* TODO: load the variables */
-});
 
+$("#search").on('click', function() {
+  var highlight = document.getElementById("highlight").value;
+  var textColor = document.getElementById("textColor").value;
+  var words = document.getElementById("words").value.split(',');
+  var myClass = document.getElementById("myClass").value;
+
+  damnFind(highlight, textColor, words, myClass);
+});
 
 /* events with inputs & textarea */
 $('.form').find('input, textarea').on('keyup blur focus', function (e) {
